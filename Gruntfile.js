@@ -11,11 +11,7 @@ module.exports = function(grunt) {
       options: {
         base: 'public'
       },
-      keepalive: {
-        options: {
-          keepalive: true
-        }
-      }
+      all: {}
     },
     wiredep: {
       build: {
@@ -28,12 +24,39 @@ module.exports = function(grunt) {
         'index.js',
         'public/app/**/*.js'
       ]
+    },
+    watch: {
+      options: {
+        livereload: true
+      },
+      scripts: {
+        files: [
+          'public/app/js/**/*.js',
+          'index.js'
+        ],
+        tasks: [ 'jshint' ]
+      },
+      css: {
+        files: [ 'public/app/css/**/*.css' ],
+        tasks: [ 'csslint' ]
+      },
+      html: {
+        files: [ 'public/index.html' ]
+      },
+      configFiles: {
+        files: [
+          'Gruntfile.js',
+          'bower.json',
+          'package.json'
+        ],
+        tasks: [ 'build' ]
+      }
     }
   });
 
-  grunt.registerTask('default', [ 'lint', 'build', 'serve' ]);
+  grunt.registerTask('default', [ 'lint', 'build', 'serve', 'watch' ]);
 
-  grunt.registerTask('serve', [ 'connect:keepalive' ]);
+  grunt.registerTask('serve', [ 'connect' ]);
 
   grunt.registerTask('build', [ 'wiredep' ]);
 
