@@ -16,10 +16,17 @@ module.exports = function(grunt) {
           keepalive: true
         }
       }
+    },
+    bowerInstall: {
+      build: {
+        src: [ 'public/vendor/index.html' ]
+      }
     }
   });
 
   grunt.registerTask('default', []);
 
-  grunt.registerTask('serve', ['connect:keepalive']);
+  grunt.registerTask('serve', [ 'connect:keepalive' ]);
+
+  grunt.registerTask('build', [ 'bowerInstall' ]);
 };
