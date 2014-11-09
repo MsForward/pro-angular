@@ -7,9 +7,19 @@ module.exports = function(grunt) {
   // Project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-
+    connect: {
+      options: {
+        base: 'public'
+      },
+      keepalive: {
+        options: {
+          keepalive: true
+        }
+      }
+    }
   });
 
   grunt.registerTask('default', []);
 
+  grunt.registerTask('serve', ['connect:keepalive']);
 };
