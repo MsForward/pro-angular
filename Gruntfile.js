@@ -21,12 +21,21 @@ module.exports = function(grunt) {
       build: {
         src: [ 'public/vendor/index.html' ]
       }
+    },
+    jshint: {
+      all:[
+        'Gruntfile.js',
+        'index.js',
+        'public/app/**/*.js'
+      ]
     }
   });
 
-  grunt.registerTask('default', []);
+  grunt.registerTask('default', [ 'lint', 'build', 'serve' ]);
 
   grunt.registerTask('serve', [ 'connect:keepalive' ]);
 
   grunt.registerTask('build', [ 'bowerInstall' ]);
+
+  grunt.registerTask('lint', [ 'jshint' ]);
 };
