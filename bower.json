@@ -1,0 +1,28 @@
+{
+  "name": "pro-angular",
+  "version": "0.0.0",
+  "authors": [
+    "Beata Obrok <beata@obrok.eu>"
+  ],
+  "main": "index.js",
+  "license": "ISC",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.2",
+    "angular-animate": "~1.3.2",
+    "angular-sanitize": "~1.3.2",
+    "bootstrap": "~3.3.0",
+    "angular-bootstrap": "~0.11.2"
+  },
+  "devDependencies": {
+    "livereload": "~2.0.8"
+  }
+}
