@@ -17,9 +17,9 @@ module.exports = function(grunt) {
         }
       }
     },
-    bowerInstall: {
+    wiredep: {
       build: {
-        src: [ 'public/vendor/index.html' ]
+        src:[ 'public/index.html' ]
       }
     },
     jshint: {
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('serve', [ 'connect:keepalive' ]);
 
-  grunt.registerTask('build', [ 'bowerInstall' ]);
+  grunt.registerTask('build', [ 'wiredep' ]);
 
   grunt.registerTask('lint', [ 'jshint' ]);
 };
