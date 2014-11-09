@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ToDoApp">
 <head lang="en">
     <meta charset="UTF-8">
-    <title>Pro Angular</title>
+    <title>TO DO List</title>
 
     <!-- bower:css -->
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.css" />
@@ -11,6 +11,42 @@
 </head>
 <body>
 
+    <main class="container-fluid">
+        <section class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <h1>Hello Angular</h1>
+                <button class="btn btn-default">{{ "AngularJS" }}</button>
+                <button class="btn btn-success">Bootstrap</button>
+
+                <div class="page-header">
+                    <h1>Adam's To Do List</h1>
+                </div>
+                <div class="panel">
+                    <div class="input-group">
+                        <input class="form-control" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-default">Add</button>
+                        </span>
+                    </div>
+
+                    <table class="table table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th>Done</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Buy Flowers</td><td>No</td></tr>
+                            <tr><td>Get Shoes</td><td>No</td></tr>
+                            <tr><td>Collect Tickets</td><td>Yes</td></tr>
+                            <tr><td>Call Joe</td><td>No</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- bower:js -->
     <script src="vendor/jquery/dist/jquery.js"></script>
@@ -20,6 +56,12 @@
     <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
     <script src="vendor/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <!-- endbower -->
+
+    <script src="//localhost:35729/livereload.js"></script>
+
+    <script>
+        var ToDoApp = angular.module("ToDoApp", []);
+    </script>
 
 </body>
 </html>
