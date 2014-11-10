@@ -9,7 +9,7 @@
     <!-- endbower -->
 
 </head>
-<body>
+<body ng-controller="ToDoCtrl">
 
     <main class="container-fluid">
         <section class="row">
@@ -19,13 +19,20 @@
                 <button class="btn btn-success">Bootstrap</button>
 
                 <div class="page-header">
-                    <h1>Adam's To Do List</h1>
+                    <h1>
+                        {{ todo.user }}'s To Do List
+                        <span ng-show="todo.count()"
+                              class="label label-default"
+                              ng-class="warningLevel()">
+                            {{ todo.count() }}
+                        </span>
+                    </h1>
                 </div>
                 <div class="panel">
                     <div class="input-group">
-                        <input class="form-control" />
+                        <input class="form-control" ng-model="item"/>
                         <span class="input-group-btn">
-                            <button class="btn btn-default">Add</button>
+                            <button ng-click="todo.add(item)" class="btn btn-default">Add</button>
                         </span>
                     </div>
 
@@ -37,12 +44,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>Buy Flowers</td><td>No</td></tr>
-                            <tr><td>Get Shoes</td><td>No</td></tr>
-                            <tr><td>Collect Tickets</td><td>Yes</td></tr>
-                            <tr><td>Call Joe</td><td>No</td></tr>
+                            <tr ng-repeat="item in todo.items| checkedItems: showComplete  | orderBy: 'action'">
+                                <td>{{ item.action }}</td>
+                                <td><input type="checkbox" ng-model="item.done" /></td>
+                            </tr>
                         </tbody>
                     </table>
+
+                    <div class="checkbox-inline">
+                        <label><input type="checkbox" ng-model="showComplete">Show Complete</label>
+                    </div>
                 </div>
             </div>
         </section>
@@ -60,7 +71,43 @@
     <script src="//localhost:35729/livereload.js"></script>
 
     <script>
-        var ToDoApp = angular.module("ToDoApp", []);
+        var model = {
+            user: 'Adam',
+            count: function() {
+                return this.items.reduce(function(total, item) {
+                    if (!item.done) total += 1;
+                    return total;
+                }, 0)
+            },
+            add: function(action) {
+                this.items.push({ action: action, done:false });
+            }
+        };
+
+        var ToDoApp = angular.module('ToDoApp', []);
+
+        ToDoApp.run(function($http) {
+           $http.get('app/todo.json').success(function(data) {
+               model.items = data;
+           });
+        });
+        
+        ToDoApp.filter('checkedItems', function() {
+           return function(items, showComplete) {
+               return items.filter(function(item) {
+                   return !item.done || showComplete;
+               });
+           };
+        });
+
+        ToDoApp.controller('ToDoCtrl', function($scope) {
+           $scope.todo = model;
+
+           $scope.warningLevel = function() {
+               console.log('Hi');
+             return $scope.todo.count() < 3 ? 'label-success' : 'label-warning';
+           };
+        });
     </script>
 
 </body>
